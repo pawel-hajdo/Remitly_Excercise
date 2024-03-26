@@ -7,10 +7,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 
-public class Main {
+public class JSONVerification {
     public static void main(String[] args) {
-        String jsonPath = "src/input.json";
+        String jsonPath = "src/ResourceWithOnlyAsterisk.json";
 
         try{
             String jsonData = readJSONFile(jsonPath);
@@ -23,10 +24,10 @@ public class Main {
         }
     }
 
-    private static String readJSONFile(String path) throws IOException {
+    public static String readJSONFile(String path) throws IOException {
         return new String(Files.readAllBytes(Paths.get(path)));
     }
-    private static boolean verifyJSON(String jsonData) {
+    public static boolean verifyJSON(String jsonData) {
         try{
             JSONObject jsonObject = new JSONObject(jsonData);
 
@@ -37,7 +38,8 @@ public class Main {
                 JSONObject statement = statementArray.getJSONObject(i);
                 String resource = statement.getString("Resource");
 
-                if(resource.contains("*")){
+                int asterisksCount = (int) resource.chars().filter(x -> x == '*').count();
+                if(asterisksCount == 1){
                     return false;
                 }
             }
