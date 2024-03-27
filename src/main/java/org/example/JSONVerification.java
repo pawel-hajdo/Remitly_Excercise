@@ -7,11 +7,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Optional;
 
 public class JSONVerification {
     public static void main(String[] args) {
-        String jsonPath = "src/ResourceWithOnlyAsterisk.json";
+        String jsonPath = "src/JSON_files/ResourceWithOnlyAsterisk.json";
 
         try{
             String jsonData = readJSONFile(jsonPath);
